@@ -1,3 +1,7 @@
+/*
+ * Пример работы с массивами
+ */
+
 #include <iostream>
 
 int main () {
