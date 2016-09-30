@@ -1,6 +1,7 @@
 #include <iostream>
-#include <string>
 #include <cmath>
+#include <string>
+
 
 int main() {
     const int NEWS_COUNT = 4;
