@@ -36,15 +36,34 @@ int main() {
     std::cin >> myLat >> myLon;
     
     bool hasNews = false;
+	double dis[4];
+	double a;
+	char p;
     
     for(int i = 0; i < NEWS_COUNT; ++i) {
         double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));   
        
-        if(distance < RADIUS) {
-            std::cout << news[i] << std::endl;
-            hasNews = true;
-        }   
+		if (distance < RADIUS) {
+			dis[i] = distance;
+			
+			hasNews = true;
+		}
     }
+	for (int i = 0;i < 4;++i) {
+		for (int j = i + 1;j < 4;++j) {
+			if dis[i] > dis[j]{
+				a = dis[j];
+			dis[j] = dis[i];
+			dis[i] = a;
+			p = news[j];
+			news[j] = news[i];
+			news[i] = p;
+			}
+		}
+	}
+	for(int i=0;i<NEWS_COUNT;++i)
+	std::cout << news[i] << "-"<< dis[i]<< std::endl;
+
     
     if (hasNews) {
         std::cout << "I hope, I helped you" << std::endl;
