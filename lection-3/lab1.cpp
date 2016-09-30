@@ -37,12 +37,18 @@ int main() {
     
     bool hasNews = false;
     
-    
     for(int i = 0; i < NEWS_COUNT; ++i) {
         double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));   
        
         if(distance < RADIUS) {
             std::cout << news[i] << std::endl;
+            hasNews = true;
         }   
+    }
+    
+    if (hasNews) {
+        std::cout << "I hope, I helped you" << std::endl;
+    } else {
+        std::cout << "Sorry, there are no news (((" << std::endl;
     }
 }
