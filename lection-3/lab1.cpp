@@ -45,9 +45,8 @@ int main() {
 		57.4
 	};
 
-	int indexes[NEWS_COUNT];
-	for (int i = 0; i<NEWS_COUNT; i++)
-		indexes[i] = -1;
+	float result[NEWS_COUNT];
+
 
 	std::cout << "News in your region:" << std::endl << std::endl;
 
@@ -56,52 +55,54 @@ int main() {
 	std::cout << "Enter your position" << std::endl;
 
 	std::cin >> myLat >> myLon;
+	std::cin.ignore();
 
 	bool hasNews = false;
 
-	for (int t = 0; t<NEWS_COUNT; t++)
+	for (int i = 0; i < NEWS_COUNT; i++)
 	{
-		for (int i = 0; i < NEWS_COUNT; i++) {
-			int min = 9999999;
-			double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));
-			if (distance < RADIUS)
+		double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));
+		result[i] = distance;
+	}
+
+	float temp = 0;
+	// Сортировка массива пузырьком
+	for (int i = 0; i < NEWS_COUNT; i++)
+	{
+		double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));
+		for (int j = 0; j < NEWS_COUNT - i - 1; j++)
+		{
+			if (result[j] > result[j + 1])
 			{
-				if (distance < min)
-				{
-					bool was = false;
-					for (int j = 0; j < NEWS_COUNT; j++)
-					{
-						if (indexes[j] == i)
-						{
-							was = true;
-							break;
-						}
-					}
-					if (!was)
-					{
-						min = distance;
-						indexes[t] = i;
-					}
-				}
+				temp = result[j];
+				result[j] = result[j + 1];
+				result[j + 1] = temp;
 			}
 		}
 	}
 
-	for (int i = 0; i < NEWS_COUNT; i++) {
-		if (indexes[i] != -1)
+	for (int i = 0; i < NEWS_COUNT; i++)
+	{
+		for (int j = 0; j < NEWS_COUNT; j++)
 		{
-			std::cout << news[indexes[i]]<<std::endl;
-			hasNews = true;
+			double distance = std::sqrt(std::pow((myLat - lats[j]), 2) + std::pow((myLon - lons[j]), 2));
+			if (distance == result[i] && distance < RADIUS)
+			{
+				std::cout << news[j] << " - " << result[i] << std::endl;
+				hasNews = true;
+				break;
+			}
 		}
 	}
 
-	if (hasNews) {
+	if (hasNews)
+	{
 		std::cout << "I hope, I helped you" << std::endl;
 	}
-	else {
+	else
+	{
 		std::cout << "Sorry, there are no news (((" << std::endl;
 	}
-	std::cin.get();
 	std::cin.get();
 }
 
