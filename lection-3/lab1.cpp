@@ -1,6 +1,8 @@
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <clocale>
 
 
 using namespace std;
@@ -31,13 +33,13 @@ int main() {
     };
 
 	char* b[NEWS_COUNT];
-	char* c;
-    
-    cout << "News in your region:" << endl << endl;
+	char* c[1];
+    setlocale(LC_ALL,"RUS");
+    cout << "Ќовости в твоем регионе:" << endl << endl;
     
     float myLat, myLon,tmp,distance;
     
-    cout << "Enter your position" << endl;
+    cout << "¬ведите свои координаты" << endl;
     
     cin >> myLat >> myLon;
     
@@ -59,15 +61,15 @@ int main() {
     {            
         for(int j = 0; j < NEWS_COUNT- 1; ++j) // внутренний цикл прохода
         {     
-            if (arr[j + 1] < arr[j]) 
+            if (a[j + 1] < a[j]) 
             {
                 tmp = a[j + 1]; 
                 a[j + 1] = a[j]; 
                 a[j] = tmp;
 
-				c = b[j + 1]; 
+				c[1] = b[j + 1]; 
                 b[j + 1] = b[j]; 
-                b[j] = c;
+                b[j] = c[1];
             }
         }
     }
