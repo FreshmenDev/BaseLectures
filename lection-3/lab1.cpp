@@ -73,4 +73,9 @@ int main() {
     }
 
 
+	for(int i = 0; i < NEWS_COUNT- 1; ++i)
+	{
+		cout <<b[i]<<" - "<<a[i]<<endl;
+	}
+
 }
