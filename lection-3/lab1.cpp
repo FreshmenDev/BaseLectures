@@ -10,7 +10,7 @@ using namespace std;
 int main() {
     const int NEWS_COUNT = 4;
     const double RADIUS = 10.0;
-    float a[NEWS_COUNT];
+    double a[NEWS_COUNT];
     char* news[] = {
      "Fire",
      "Flood",
@@ -18,14 +18,14 @@ int main() {
      "City Day"    
     };
     
-    float lats[] = {
+    double lats[] = {
      45.5,
      48.6,
      58.6,
      60.6
     };
     
-    float lons[] = {
+    double lons[] = {
      40.5,
      47.6,
      56.6,
@@ -37,7 +37,7 @@ int main() {
     setlocale(LC_ALL,"RUS");
     cout << "Новости в твоем регионе:" << endl << endl;
     
-    float myLat, myLon,tmp,distance;
+    double myLat, myLon,tmp,distance;
     
     cout << "Введите свои координаты" << endl;
     
