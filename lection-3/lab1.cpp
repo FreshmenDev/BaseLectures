@@ -2,12 +2,14 @@
 #include <string>
 #include <cmath>
 
+using namespace std;
+
 int main() {
-    using namespace std;
+
     const int NEWS_COUNT = 4;
     const double RADIUS = 10.0;
-    double DISTANCE[NEWS_COUNT];
-    char* NEWS [NEWS_COUNT];
+    double arrDistances[NEWS_COUNT];
+    char* arrNews [NEWS_COUNT];
 
     char* news[] = {
             "Fire",
@@ -34,7 +36,7 @@ int main() {
     cout << "News in your region:" << endl << endl;
 
     float myLat, myLon;
-    float theAuxiliaryVariable, dis;
+    float tmp, distance;
 
     cout << "Enter your position" << endl;
 
@@ -43,22 +45,22 @@ int main() {
     bool hasNews = false;
 
     for(int i = 0; i < NEWS_COUNT; ++i) {
-        dis =sqrt(pow((myLat - lats[i]), 2) + pow((myLon - lons[i]), 2));
-        if(dis < RADIUS) {
-            DISTANCE[i] = dis;
-            NEWS[i] = news[i];
+        distance =sqrt(pow((myLat - lats[i]), 2) + pow((myLon - lons[i]), 2));
+        if(distance < RADIUS) {
+            arrDistances[i] = distance;
+            arrNews[i] = news[i];
         }
     }
     for(int i = 0; i < NEWS_COUNT- 1; ++i) {
         for(int j = 0; j < NEWS_COUNT- i; ++j) {
-            if (DISTANCE[j] > DISTANCE[j+1]) {
-                theAuxiliaryVariable = DISTANCE[j + 1];
-                DISTANCE[j + 1] = DISTANCE[j];
-                DISTANCE[j] = theAuxiliaryVariable;
+            if (arrDistances[j] > arrDistances[j+1) {
+                tmp = arrDistances[j + 1];
+                arrDistances[j + 1] = arrDistances[j];
+                arrDistances[j] = tmp;
 
-                receivingArray = NEWS[j + 1];
-                NEWS[j + 1] = NEWS[j];
-                NEWS[j] = receivingArray;
+                receivingArray = arrNews[j + 1];
+                arrNews[j + 1] = arrNews[j];
+                arrNews[j] = receivingArray;
             }
         }
     }
@@ -66,8 +68,8 @@ int main() {
 
 
     for(int i = 0; i < NEWS_COUNT; ++i) {
-        if (DISTANCE[i]>0){
-            cout <<NEWS[i]<<" - "<<DISTANCE[i]<<endl;
+        if (arrDistances[i]>0){
+            cout << arrNews[i] << " - " << arrDistances[i] << endl;
             hasNews = true;
         }
     }
