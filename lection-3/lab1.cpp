@@ -5,14 +5,14 @@
 #include <locale>
 #include <stdio.h>
 
-using std::cout; //определяем только те операций,
-using std::cin; //которые нам нужны (избежение конфликтов)
+using std::cout;
+using std::cin;
 
 
 const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
- struct Help // определяем базу данных и массив news
+ struct Help
     {
         char* description;
         float lon;
@@ -25,8 +25,6 @@ const double RADIUS = 10.0;
                             {"Asteroid", 58.6, 56.6},
                             {"City Day", 60.6, 43.6}
                         };
-						
-						
 int main()
 {
     setlocale(0, "RUS");
@@ -43,9 +41,8 @@ int main()
     bool hasNews = false;
     float dist[NEWS_COUNT];
 
-    for(int i = 0; i < NEWS_COUNT; ++i) // Вопрос: играет ли в данном случае какую-то роль место оператора ++ ?
-										// Если да, как можно написать всё определение 
-    {									// цикла используя постфиксный вариант?
+    for(int i = 0; i < NEWS_COUNT; ++i) 
+    {
         double distance = sqrt(pow((myLat - news[i].lat), 2) + pow((myLon - news[i].lon), 2));   
        
         if(distance < RADIUS) 
@@ -53,13 +50,15 @@ int main()
             dist[i] = distance;
             hasNews = true;
         }   
+        else {
+            dist[i] = 0;
+        }
     }
 
-	// определение времменых переменых для использования в сортировки
-    float temp_num; 
+    float temp_num;
     char* temp_str;
 
-    for (int i = 0; i < NEWS_COUNT; ++i) // сортировка (по порядку возрастания)
+    for (int i = 0; i < NEWS_COUNT; ++i)
     {
         for (int j = i + 1; j < NEWS_COUNT; ++j)
         {
@@ -77,22 +76,26 @@ int main()
         }
     }
 
-    // вывод на экран
-    cout << "NEWS        DISTANCE\n\n";
+    
+    
 
     if (hasNews) 
     {
+        cout << "NEWS        DISTANCE\n\n";
         for (int i = 0; i < NEWS_COUNT; ++i)
         {
-            printf(news[i].description);
-            cout << "        ";
-            printf("%.2f", dist[i]);
-			cout << '\n';
+            if (dist[i] != 0) 
+            {
+                printf(news[i].description);
+                cout << "        ";
+                printf("%.2f", dist[i]);
+			    cout << '\n';
+            }
         }
-        cout << "I was glad to help you." << '\n';
+        cout << "\nI was glad to help you" << '\n';
     } 
     else {
-        cout << "Sorry, there are no news." << '\n';
+        cout << "Sorry, there are no news " << '\n';
     }
 	
     return 0;
