@@ -1,0 +1,84 @@
+#include <iostream>
+#include <string>
+#include <cmath> 
+#include <iomanip> 
+#include <stdio.h> 
+
+using namespace std;
+
+struct News
+{
+	char* nov;
+	double lats;
+	double lons;
+	double dis;
+};
+int main()
+{
+	const int NEWS_COUNT = 4;
+	const double RADIUS = 10.0;
+
+	News news[NEWS_COUNT];
+
+	news[1].nov = "Fire";
+	news[2].nov = "Flood";
+	news[3].nov = "Asteroid";
+	news[4].nov = "City day";
+
+	news[1].lats = 45.5;
+	news[2].lats = 48.6;
+	news[3].lats = 58.6;
+	news[4].lats = 60.6;
+
+	news[1].lons = 40.5;
+	news[2].lons = 47.6;
+	news[3].lons = 56.6;
+	news[4].lons = 43.6;
+
+
+	cout << "News in your region:" << endl << endl;
+
+	double myLat, myLon, q;
+	char* k;
+	int j;
+
+	cout << "Enter your position" << endl;
+
+	cin >> myLat >> myLon;
+
+
+	for (int i = 0; i < NEWS_COUNT; ++i)
+	{
+		double distance = sqrt(pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));
+
+		if (distance < RADIUS) {
+			news[i].dis = distance;
+		}
+		for (i = 0; i < NEWS_COUNT - 1; i++)
+		{
+			for (j = 0; j < NEWS_COUNT - i; j++)
+			{
+				if (news[j].dis > news[j + 1].dis)
+				{
+					k = news[j + 1].nov;
+					news[j + 1].nov = news[j].nov;
+					news[j].nov = k;
+
+					q = news[j + 1].dis;
+					news[j + 1].dis = news[j].dis;
+					news[j].dis = q;
+				}
+			}
+		}
+
+		for (i = 0; i < NEWS_COUNT; i++)
+		{
+			if (news[i].dis > 0) 
+			{
+				cout << news[i].nov <<  news[i].dis << '\n';
+			}
+
+		}
+	}
+	return 0;
+}
