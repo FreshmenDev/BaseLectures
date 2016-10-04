@@ -1,54 +1,102 @@
+
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <locale>
+#include <stdio.h>
 
-int main() {
-    const int NEWS_COUNT = 4;
-    const double RADIUS = 10.0;
-    
-    char* news[] = {
-     "Fire",
-     "Flood",
-     "Asteroid",
-     "City Day"    
-    };
-    
-    float lats[] = {
-     45.5,
-     48.6,
-     58.6,
-     60.6
-    };
-    
-    float lons[] = {
-     40.5,
-     47.6,
-     56.6,
-     43.6
-    };
-    
-    std::cout << "News in your region:" << std::endl << std::endl;
+using std::cout;
+using std::cin;
+
+
+const int NEWS_COUNT = 4;
+const double RADIUS = 10.0;
+
+ struct Help
+    {
+        char* description;
+        float lon;
+        float lat;
+        double distance;
+    }
+    news[NEWS_COUNT] = {
+                            {"Fire", 45.5, 40.5},
+                            {"Flood", 48.6, 47.6},
+                            {"Asteroid", 58.6, 56.6},
+                            {"City Day", 60.6, 43.6}
+                        };
+int main()
+{
+    setlocale(0, "RUS");
+
+
+    cout << "News in your region: \n\n";
     
     float myLat, myLon;
     
-    std::cout << "Enter your position" << std::endl;
+    cout << "Enter your position (Latitude, Longtitude)" << '\n';
     
-    std::cin >> myLat >> myLon;
+    cin >> myLat >> myLon;
     
     bool hasNews = false;
-    
-    for(int i = 0; i < NEWS_COUNT; ++i) {
-        double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));   
+    float dist[NEWS_COUNT];
+
+    for(int i = 0; i < NEWS_COUNT; ++i) 
+    {
+        double distance = sqrt(pow((myLat - news[i].lat), 2) + pow((myLon - news[i].lon), 2));   
        
-        if(distance < RADIUS) {
-            std::cout << news[i] << std::endl;
+        if(distance < RADIUS) 
+        {
+            dist[i] = distance;
             hasNews = true;
         }   
+        else {
+            dist[i] = 0;
+        }
     }
+
+    float temp_num;
+    char* temp_str;
+
+    for (int i = 0; i < NEWS_COUNT; ++i)
+    {
+        for (int j = i + 1; j < NEWS_COUNT; ++j)
+        {
+            if (dist[i] > dist [j])
+            {
+                temp_num = dist[j];
+                dist[j] = dist[i];
+                dist[i] = temp_num;
+
+                temp_str = news[j].description;
+                news[j].description = news[i].description;
+                news[i].description = temp_str;
+
+            }
+        }
+    }
+
     
-    if (hasNews) {
-        std::cout << "I hope, I helped you" << std::endl;
-    } else {
-        std::cout << "Sorry, there are no news (((" << std::endl;
+    
+
+    if (hasNews) 
+    {
+        cout << "NEWS        DISTANCE\n\n";
+        for (int i = 0; i < NEWS_COUNT; ++i)
+        {
+            if (dist[i] != 0) 
+            {
+                printf(news[i].description);
+                cout << "        ";
+                printf("%.2f", dist[i]);
+			    cout << '\n';
+            }
+        }
+        cout << "\nI was glad to help you" << '\n';
+    } 
+    else {
+        cout << "Sorry, there are no news " << '\n';
     }
+	
+    return 0;
 }
