@@ -5,14 +5,14 @@
 #include <locale>
 #include <stdio.h>
 
-using std::cout;
-using std::cin;
+using std::cout; //определяем только те операций,
+using std::cin; //которые нам нужны (избежение конфликтов)
 
 
 const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
- struct Help
+ struct Help // определяем базу данных и массив news
     {
         char* description;
         float lon;
@@ -41,7 +41,9 @@ int main()
     bool hasNews = false;
     float dist[NEWS_COUNT];
 
-    for(int i = 0; i < NEWS_COUNT; ++i) 
+    for(int i = 0; i < NEWS_COUNT; ++i) // Вопрос: играет ли в данном случае какую-то роль место оператора ++ ?
+										// Если да, как можно написать всё определение 
+										// цикла используя постфиксный вариант?
     {
         double distance = sqrt(pow((myLat - news[i].lat), 2) + pow((myLon - news[i].lon), 2));   
        
@@ -54,11 +56,12 @@ int main()
             dist[i] = 0;
         }
     }
-
+	
+	// определение времменых переменых для использования в сортировки
     float temp_num;
     char* temp_str;
 
-    for (int i = 0; i < NEWS_COUNT; ++i)
+    for (int i = 0; i < NEWS_COUNT; ++i)  // сортировка (по порядку возрастания)
     {
         for (int j = i + 1; j < NEWS_COUNT; ++j)
         {
@@ -79,7 +82,7 @@ int main()
     
     
 
-    if (hasNews) 
+    if (hasNews) // вывод на экран
     {
         cout << "NEWS        DISTANCE\n\n";
         for (int i = 0; i < NEWS_COUNT; ++i)
