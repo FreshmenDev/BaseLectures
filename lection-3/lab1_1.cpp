@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #include <iostream>
 #include <string>  //Все подключенные библиотеки
@@ -7,7 +6,7 @@
 
 using namespace std; //Чтобы не писать постоянно std::
 
-const int NEWS_COUNT = 4; //Константы
+const int NEWS_COUT = 4; //Константы
 const double RADIUS =10.0;
 
 struct News //Описание структуры
@@ -22,7 +21,7 @@ int main()
 {
 	setlocale(LC_ALL,"RUS"); //Подключение поддержки русского языка
 
-    News news [NEWS_COUNT]; //Создание структуры данных
+    News news [NEWS_COUT]; //Создание структуры данных
 
 	   news[1].description = "Fire"; //Записывает названия новостей в структуру
 	   news[2].description = "Flood";
@@ -46,9 +45,9 @@ int main()
 	cout <<"Введите свои координаты" << endl;
 	cin >>myLat >>myLon;
 	
-	for(int i = 0; i < NEWS_COUNT; ++i)
+	for(int i = 0; i < NEWS_COUT; ++i)
 	  {
-	     distance=sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2));
+	     distance=sqrt(pow(myLat-news[i].lat),2)+pow((myLon-news[i].lon),2));
 	     if(distance < RADIUS)   //Если расстояние о новости входит в наш радиус,то записать его под соответствующим индексом
 	      {
 		     news[i].distance = distance;
@@ -72,9 +71,9 @@ int main()
 			   }
 	    }
 
-	for(int i = 0; i < NEWS_COUNT; ++i) //Вывод по условию задачи
+	for(int i = 0; i < NEWS_COUT; ++i) //Вывод по условию задачи
 	  {
-		  if(news[i].distance>0)
+		  if(news[i].distance>o)
 		    {
 				cout <<news[i].description<<" - "<<news[i].distance<<endl;
 		    }
@@ -89,5 +88,4 @@ int main()
 
 
 	 
-
 
