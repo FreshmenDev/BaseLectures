@@ -15,32 +15,15 @@ struct News //Описание структуры
 	 char* description;
 	 double lat;
 	 double lon;
+	 double distance;
  };
-
-double swap(double a, double b)
- {
-   double c;
-   c = a;
-   a = b;
-   b = c;
-   return(0);
- }
-
-char* swap1(char* a, char* b)
- {
-   char* c;
-   c = a;
-   a = b;
-   b = c;
-   return(0);
- }
-
 
 int main()
 {
     setlocale(LC_ALL,"RUS"); //Подключение поддержки русского языка
 
     News news [NEWS_COUNT]; //Создание структуры данных
+	News Type;
 
     news[0].description = "Fire"; //Записывает названия новостей в структуру
     news[1].description = "Flood";
@@ -62,25 +45,30 @@ int main()
 	cout<<"Новости в твоем регионе"<<endl<<endl;
 	cout<<"Введите свои координаты"<<endl;
 	cin>>myLat>>myLon;
-	
+
+	for(int i = 0; i < NEWS_COUNT; ++i)
+	  {
+	    news[i].distance = sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2));
+	  }
+
 	for(int i = 0; i < NEWS_COUNT; ++i) //Метод пузырька
 	  {
 		for(int j = 0; j< NEWS_COUNT - i; ++j)
 		  {
-			if(sqrt(pow((myLat-news[j].lat),2)+pow((myLon-news[j].lon),2)) > sqrt(pow((myLat-news[j+1].lat),2)+pow((myLon-news[j+1].lon),2)))
+			if(news[j].distance > news[j+1].distance)
 			  {
-				swap(news[j].lat,news[j+1].lat);
-				swap(news[j].lon,news[j+1].lon);
-				swap1(news[j].description,news[j+1].description);
+				Type = news[j];
+				news[j]=news[j+1];
+				news[j+1]=Type;
 			  }
 		  }
 	  }
 
 	for(int i = 0; i < NEWS_COUNT; ++i) //Вывод по условию задачи
 	  {
-		if(sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2))<RADIUS)
+		if(news[i].distance < RADIUS)
 		  {
-			cout<<news[i].description<<" - "<<sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2))<<endl;
+			cout<<news[i].description<<" - "<<news[i].distance<<endl;
 		  }
 	  }
 
