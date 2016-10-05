@@ -71,6 +71,18 @@ int main()
 			   }
 	    }
 
+	for(int i = 0; i < NEWS_COUT; ++i) //Вывод по условию задачи
+	  {
+		  if(news[i].distance>o)
+		    {
+				cout <<news[i].description<<" - "<<news[i].distance<<endl;
+		    }
+	  }
+
+
+
+
+
 
 
 	 
