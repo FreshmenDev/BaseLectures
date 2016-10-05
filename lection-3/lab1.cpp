@@ -15,7 +15,6 @@ struct News //Описание структуры
 	 char* description;
 	 double lat;
 	 double lon;
-	 double distance;
  };
 
 double swap(double a,b)
@@ -26,7 +25,7 @@ double swap(double a,b)
    b = c;
  }
 
-char* swap(char* a,b)
+char* swap1(char* a,b)
  {
    char* c;
    c = a;
@@ -56,43 +55,30 @@ int main()
 	news[2].lon = 56.6; 
 	news[3].lon = 43.6; 
 
-    char* c;
-    double myLat,myLon,tmp; //Остальные необходимые переменные 
+    double myLat,myLon; //Остальные необходимые переменные 
 
 	cout<<"Новости в твоем регионе"<<endl<<endl;
 	cout<<"Введите свои координаты"<<endl;
 	cin>>myLat>>myLon;
 	
-	for(int i = 0; i < NEWS_COUNT; ++i)
-	  {
-		if(sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2)) < RADIUS)   
-		  {
-		    news[i].distance = sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2));;
-		  }
-	  }
-
 	for(int i = 0; i < NEWS_COUNT; ++i) //Метод пузырька
 	  {
 		for(int j = 0; j< NEWS_COUNT - i; ++j)
 		  {
-			if(news[j].distance>news[j+1].distance)
+			if(sqrt(pow((myLat-news[j].lat),2)+pow((myLon-news[j].lon),2)) > sqrt(pow((myLat-news[j+1].lat),2)+pow((myLon-news[j+1].lon),2)))
 			  {
-				tmp = news[j+1].distance;
-				news[j+1].distance = news[j].distance; //Сортировка расстояний
-				news[j].distance = tmp;
-
-				c = news[j+1].description;
-				news[j+1].description = news[j].description; //Сортировка названия новостей
-				news[j].description = c;
+				swap(news[j].lat,news[j+1].lat);
+				swap(news[j].lon,news[j+1].lon);
+				swap1(news[j].description,news[j+1].description);
 			  }
 		  }
 	  }
 
 	for(int i = 0; i < NEWS_COUNT; ++i) //Вывод по условию задачи
 	  {
-		if(news[i].distance>0)
+		if(sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2))<RADIUS)
 		  {
-			cout<<news[i].description<<" - "<<news[i].distance<<endl;
+			cout<<news[i].description<<" - "<<sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2))<<endl;
 		  }
 	  }
 
