@@ -17,20 +17,22 @@ struct News //Описание структуры
 	 double lon;
  };
 
-double swap(double a,b)
+double swap(double a, double b)
  {
    double c;
    c = a;
    a = b;
    b = c;
+   return(0);
  }
 
-char* swap1(char* a,b)
+char* swap1(char* a, char* b)
  {
    char* c;
    c = a;
    a = b;
    b = c;
+   return(0);
  }
 
 
