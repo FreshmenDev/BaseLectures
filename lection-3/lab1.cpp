@@ -23,7 +23,7 @@ int main()
     setlocale(LC_ALL,"RUS"); //Подключение поддержки русского языка
 
     News news [NEWS_COUNT]; //Создание структуры данных
-	News Type;
+	News tempNews;
 
     news[0].description = "Fire"; //Записывает названия новостей в структуру
     news[1].description = "Flood";
@@ -57,9 +57,9 @@ int main()
 		  {
 			if(news[j].distance > news[j+1].distance)
 			  {
-				Type = news[j];
+				tempNews = news[j];
 				news[j]=news[j+1];
-				news[j+1]=Type;
+				news[j+1]=tempNews;
 			  }
 		  }
 	  }
