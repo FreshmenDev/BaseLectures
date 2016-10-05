@@ -54,8 +54,22 @@ int main()
 	     }
 	   }
 
+	for(int i = 0; i < NEWS_COUNT; ++i) //Метод пузырька
+		{
+			for(int j = 0; j< NEWS_COUNT - i; ++j)
+			   {
+				   if(news[j].distance>news[j+1].distance)
+				     {
+						 tmp = news[j+1].distance;
+						 news[j+1].distance = news[j].distance; //Сортировка расстояний
+						 news[j].distance = tmp;
 
-
+						 c = news[j+1].description;
+						 news[j+1].description = news[j].description; //Сортировка названия новостей
+						 news[j].description = c;
+				     }
+			   }
+	    }
 
 
 
