@@ -1,16 +1,16 @@
-
+п»ї
 #include "stdafx.h"
 #include <iostream>
-#include <string>  //Все подключенные библиотеки
+#include <string>  //Р’СЃРµ РїРѕРґРєР»СЋС‡РµРЅРЅС‹Рµ Р±РёР±Р»РёРѕС‚РµРєРё
 #include <cmath>
 #include <clocale>
 
-using namespace std; //Чтобы не писать постоянно std::
+using namespace std; //Р§С‚РѕР±С‹ РЅРµ РїРёСЃР°С‚СЊ РїРѕСЃС‚РѕСЏРЅРЅРѕ std::
 
-const int NEWS_COUNT = 4; //Константы
+const int NEWS_COUNT = 4; //РљРѕРЅСЃС‚Р°РЅС‚С‹
 const double RADIUS =10.0;
 
-struct News //Описание структуры
+struct News //РћРїРёСЃР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹
  {
 	 char* description;
 	 double lat;
@@ -20,59 +20,59 @@ struct News //Описание структуры
 
 int main()
 {
-	setlocale(LC_ALL,"RUS"); //Подключение поддержки русского языка
+	setlocale(LC_ALL,"RUS"); //РџРѕРґРєР»СЋС‡РµРЅРёРµ РїРѕРґРґРµСЂР¶РєРё СЂСѓСЃСЃРєРѕРіРѕ СЏР·С‹РєР°
 
-    News news [NEWS_COUNT]; //Создание структуры данных
+    News news [NEWS_COUNT]; //РЎРѕР·РґР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РґР°РЅРЅС‹С…
 
-	   news[1].description = "Fire"; //Записывает названия новостей в структуру
+	   news[1].description = "Fire"; //Р—Р°РїРёСЃС‹РІР°РµС‚ РЅР°Р·РІР°РЅРёСЏ РЅРѕРІРѕСЃС‚РµР№ РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ
 	   news[2].description = "Flood";
 	   news[3].description = "Asteroid";
 	   news[4].description = "Citi day";
 
-	   news[1].lat = 45.5; //Записывает долготу в структуру
+	   news[1].lat = 45.5; //Р—Р°РїРёСЃС‹РІР°РµС‚ РґРѕР»РіРѕС‚Сѓ РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ
 	   news[2].lat = 48.6;
 	   news[3].lat = 58.6;
 	   news[4].lat = 60.6;
     
-	   news[1].lon = 40.5; //Записывает широту в структуру
+	   news[1].lon = 40.5; //Р—Р°РїРёСЃС‹РІР°РµС‚ С€РёСЂРѕС‚Сѓ РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ
 	   news[2].lon = 47.6; 
 	   news[3].lon = 56.6; 
 	   news[4].lon = 43.6; 
 
 	char* c;
-	double myLat,myLon,tmp,distance; //Остальные необходимые переменные 
+	double myLat,myLon,tmp,distance; //РћСЃС‚Р°Р»СЊРЅС‹Рµ РЅРµРѕР±С…РѕРґРёРјС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ 
 
-	cout <<"Новости в твоем регионе" << endl << endl;
-	cout <<"Введите свои координаты" << endl;
+	cout <<"РќРѕРІРѕСЃС‚Рё РІ С‚РІРѕРµРј СЂРµРіРёРѕРЅРµ" << endl << endl;
+	cout <<"Р’РІРµРґРёС‚Рµ СЃРІРѕРё РєРѕРѕСЂРґРёРЅР°С‚С‹" << endl;
 	cin >>myLat >>myLon;
 	
 	for(int i = 0; i < NEWS_COUNT; ++i)
 	  {
 	     distance=sqrt(pow((myLat-news[i].lat),2)+pow((myLon-news[i].lon),2));
-	     if(distance < RADIUS)   //Если расстояние о новости входит в наш радиус,то записать его под соответствующим индексом
+	     if(distance < RADIUS)   //Р•СЃР»Рё СЂР°СЃСЃС‚РѕСЏРЅРёРµ Рѕ РЅРѕРІРѕСЃС‚Рё РІС…РѕРґРёС‚ РІ РЅР°С€ СЂР°РґРёСѓСЃ,С‚Рѕ Р·Р°РїРёСЃР°С‚СЊ РµРіРѕ РїРѕРґ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј РёРЅРґРµРєСЃРѕРј
 	      {
 		     news[i].distance = distance;
 	     }
 	   }
 
-	for(int i = 0; i < NEWS_COUNT; ++i) //Метод пузырька
+	for(int i = 0; i < NEWS_COUNT; ++i) //РњРµС‚РѕРґ РїСѓР·С‹СЂСЊРєР°
 		{
 			for(int j = 0; j< NEWS_COUNT - i; ++j)
 			   {
 				   if(news[j].distance>news[j+1].distance)
 				     {
 						 tmp = news[j+1].distance;
-						 news[j+1].distance = news[j].distance; //Сортировка расстояний
+						 news[j+1].distance = news[j].distance; //РЎРѕСЂС‚РёСЂРѕРІРєР° СЂР°СЃСЃС‚РѕСЏРЅРёР№
 						 news[j].distance = tmp;
 
 						 c = news[j+1].description;
-						 news[j+1].description = news[j].description; //Сортировка названия новостей
+						 news[j+1].description = news[j].description; //РЎРѕСЂС‚РёСЂРѕРІРєР° РЅР°Р·РІР°РЅРёСЏ РЅРѕРІРѕСЃС‚РµР№
 						 news[j].description = c;
 				     }
 			   }
 	    }
 
-	for(int i = 0; i < NEWS_COUNT; ++i) //Вывод по условию задачи
+	for(int i = 0; i < NEWS_COUNT; ++i) //Р’С‹РІРѕРґ РїРѕ СѓСЃР»РѕРІРёСЋ Р·Р°РґР°С‡Рё
 	  {
 		  if(news[i].distance>0)
 		    {
@@ -80,7 +80,7 @@ int main()
 		    }
 	  }
 
-	system("pause"); //Добавил,чтобы не улетало меню с выводом данных
+	system("pause"); //Р”РѕР±Р°РІРёР»,С‡С‚РѕР±С‹ РЅРµ СѓР»РµС‚Р°Р»Рѕ РјРµРЅСЋ СЃ РІС‹РІРѕРґРѕРј РґР°РЅРЅС‹С…
 
 }
 
