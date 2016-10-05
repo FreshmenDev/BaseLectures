@@ -1,54 +1,82 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <iomanip>
+#include <stdio.h>
 
-int main() {
+using namespace std;
+
+ struct News
+ {
+        char* des;
+        double lats;
+        double lons;
+        double zone;
+    };
+int main()
+{
     const int NEWS_COUNT = 4;
     const double RADIUS = 10.0;
     
-    char* news[] = {
-     "Fire",
-     "Flood",
-     "Asteroid",
-     "City Day"    
-    };
+     News news[NEWS_COUNT];
+     
+    news[1].des = "Fire";
+    news[2].des = "Flood";
+    news[3].des = "Asteroid";
+    news[4].des = "City day";
     
-    float lats[] = {
-     45.5,
-     48.6,
-     58.6,
-     60.6
-    };
+    news[1].lats = 45.5;
+    news[2].lats = 48.6;
+    news[3].lats = 58.6;
+    news[4].lats = 60.6;
     
-    float lons[] = {
-     40.5,
-     47.6,
-     56.6,
-     43.6
-    };
+    news[1].lons = 40.5;
+    news[2].lons = 47.6;
+    news[3].lons = 56.6;
+    news[4].lons = 43.6;
     
-    std::cout << "News in your region:" << std::endl << std::endl;
     
-    float myLat, myLon;
+    cout << "News in your region:" << endl << endl;
     
-    std::cout << "Enter your position" << std::endl;
+    double myLat, myLon, q;
+    char* k;
+    int j;
     
-    std::cin >> myLat >> myLon;
+    cout << "Enter your position" << endl;
     
-    bool hasNews = false;
+    cin >> myLat >> myLon;
+    
     
     for(int i = 0; i < NEWS_COUNT; ++i) {
-        double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));   
+        double distance = sqrt(pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));   
        
         if(distance < RADIUS) {
-            std::cout << news[i] << std::endl;
-            hasNews = true;
+           news[i].zone = distance;
         }   
-    }
+        for( i = 0 ; i < NEWS_COUNT - 1; i++)
+        {
+            for(j = 0; j < NEWS_COUNT - i; j++)
+            {
+                if(news[j].zone > news[j+1].zone)
+                {
+                k = news[j+1].des;
+                news[j+1].des = news[j].des;
+                news[j].des = k;
+                
+                q = news[j+1].zone;
+                news[j+1].zone = news[j].zone;
+                news[j].zone = q;
+                }
+            }
+        }    
     
-    if (hasNews) {
-        std::cout << "I hope, I helped you" << std::endl;
-    } else {
-        std::cout << "Sorry, there are no news (((" << std::endl;
+     for(i=0 ; i < NEWS_COUNT ; i++)
+     { if(news[i].zone > 0) {
+
+        cout << news[i].des << " - " << news[i].zone << '\n';
+     } 
+     
     }
+ }
+return 0;
 }
