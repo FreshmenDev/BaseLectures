@@ -12,7 +12,7 @@ using std::cin; //которые нам нужны (избежение конф�
 const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
- struct Help // определяем базу данных и массив news
+ struct Help // определяем структуру данных и массив news
     {
         char* description;
         float lon;
@@ -20,11 +20,12 @@ const double RADIUS = 10.0;
         double distance;
     }
     news[NEWS_COUNT] = {
-                            {"Fire", 45.5, 40.5},
-                            {"Flood", 48.6, 47.6},
-                            {"Asteroid", 58.6, 56.6},
-                            {"City Day", 60.6, 43.6}
-                        };
+	    {"Fire", 45.5, 40.5},
+        {"Flood", 48.6, 47.6},
+        {"Asteroid", 58.6, 56.6},
+        {"City Day", 60.6, 43.6}
+    };
+	
 int main()
 {
     setlocale(0, "RUS");
@@ -41,9 +42,8 @@ int main()
     bool hasNews = false;
     float dist[NEWS_COUNT];
 
-    for(int i = 0; i < NEWS_COUNT; ++i) // Вопрос: играет ли в данном случае какую-то роль место оператора ++ ?
-										// Если да, как можно написать всё определение 
-										// цикла используя постфиксный вариант?
+    for(int i = 0; i < NEWS_COUNT; ++i) 
+		
     {
         double distance = sqrt(pow((myLat - news[i].lat), 2) + pow((myLon - news[i].lon), 2));   
        
