@@ -2,8 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-#include <locale>
-#include <stdio.h>
+#include <iomanip>
 
 using std::cout; //определяем только те операций,
 using std::cin; //которые нам нужны (избежение конфликтов)
@@ -28,9 +27,7 @@ const double RADIUS = 10.0;
 	
 int main()
 {
-    setlocale(0, "RUS");
-
-
+	
     cout << "News in your region: \n\n";
     
     float myLat, myLon;
@@ -80,8 +77,6 @@ int main()
     }
 
     
-    
-
     if (hasNews) // вывод на экран
     {
         cout << "NEWS        DISTANCE\n\n";
@@ -89,10 +84,10 @@ int main()
         {
             if (dist[i] != 0) 
             {
-                printf(news[i].description);
+                cout << news[i].description;
                 cout << "        ";
-                printf("%.2f", dist[i]);
-			    cout << '\n';
+                cout << std::setprecision(3) << dist[i];
+                cout << '\n';
             }
         }
         cout << "\nI was glad to help you" << '\n';
