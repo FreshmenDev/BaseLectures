@@ -11,25 +11,22 @@ using std::cin; //которые нам нужны (избежение конф�
 const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
- struct Help // определяем структуру данных
+ struct Help // определяем структуру данных и массив news
     {
         char* description;
         float lon;
         float lat;
         double distance;
-    };
-	
-
-	
-int main()
-{
-	// определяем массив news структуры Help
-	Help news[NEWS_COUNT] = {
+    }
+    news[NEWS_COUNT] = {
 	    {"Fire", 45.5, 40.5},
         {"Flood", 48.6, 47.6},
         {"Asteroid", 58.6, 56.6},
         {"City Day", 60.6, 43.6}
     };
+	
+int main()
+{
 	
     cout << "News in your region: \n\n";
     
