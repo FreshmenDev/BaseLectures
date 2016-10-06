@@ -39,12 +39,12 @@ int main()
     bool hasNews = false;
     float dist[NEWS_COUNT];
 
-    for(int i = 0; i < NEWS_COUNT; ++i) 
+    for (int i = 0; i < NEWS_COUNT; ++i) 
 		
     {
         double distance = sqrt(pow((myLat - news[i].lat), 2) + pow((myLon - news[i].lon), 2));   
        
-        if(distance < RADIUS) 
+        if (distance < RADIUS) 
         {
             dist[i] = distance;
             hasNews = true;
@@ -55,8 +55,8 @@ int main()
     }
 	
 	// определение времменых переменых для использования в сортировки
-    float temp_num;
-    char* temp_str;
+    float tempNum;
+    char* tempStr;
 
     for (int i = 0; i < NEWS_COUNT; ++i)  // сортировка (по порядку возрастания)
     {
@@ -64,13 +64,13 @@ int main()
         {
             if (dist[i] > dist [j])
             {
-                temp_num = dist[j];
+                tempNum = dist[j];
                 dist[j] = dist[i];
-                dist[i] = temp_num;
+                dist[i] = tempNum;
 
-                temp_str = news[j].description;
+                tempStr = news[j].description;
                 news[j].description = news[i].description;
-                news[i].description = temp_str;
+                news[i].description = tempStr;
 
             }
         }
