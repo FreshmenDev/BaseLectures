@@ -11,22 +11,25 @@ using std::cin; //которые нам нужны (избежение конф�
 const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
- struct Help // определяем структуру данных и массив news
+ struct Help // определяем структуру данных
     {
-        char* description;
         float lon;
         float lat;
+        char* description;
         double distance;
-    }
-    news[NEWS_COUNT] = {
-	    {"Fire", 45.5, 40.5},
-        {"Flood", 48.6, 47.6},
-        {"Asteroid", 58.6, 56.6},
-        {"City Day", 60.6, 43.6}
     };
+	
+
 	
 int main()
 {
+	// определяем массив news структуры Help
+	Help news[NEWS_COUNT] = {
+	    {45.5, 40.5, "Fire"},
+	    {48.6, 47.6, "Flood"},
+        {58.6, 56.6, "Asteroid"},
+        {60.6, 43.6, "City Day"}
+    };
 	
     cout << "News in your region: \n\n";
     
@@ -39,8 +42,7 @@ int main()
     bool hasNews = false;
     float dist[NEWS_COUNT];
 
-    for (int i = 0; i < NEWS_COUNT; ++i) 
-		
+    for (int i = 0; i < NEWS_COUNT; ++i) 	
     {
         double distance = sqrt(pow((myLat - news[i].lat), 2) + pow((myLon - news[i].lon), 2));   
        
@@ -79,13 +81,13 @@ int main()
     
     if (hasNews) // вывод на экран
     {
-        cout << "NEWS        DISTANCE\n\n";
+        cout << "NEWS\t\tDISTANCE\n\n";
         for (int i = 0; i < NEWS_COUNT; ++i)
         {
             if (dist[i] != 0) 
             {
                 cout << news[i].description;
-                cout << "        ";
+                cout << "\t\t";
                 cout << std::setprecision(3) << dist[i];
                 cout << '\n';
             }
