@@ -6,26 +6,29 @@ int main() {
     const int NEWS_COUNT = 4;
     const double RADIUS = 10.0;
     
-    char* news[] = {
-     "Fire",
-     "Flood",
-     "Asteroid",
-     "City Day"    
-    };
+	struct News {  // ќбъ€вление структуры News
+ 		char* description; 
+ 		double lats; 
+ 		double lons; 
+ 		float D; 
+	};  
     
-    float lats[] = {
-     45.5,
-     48.6,
-     58.6,
-     60.6
-    };
-    
-    float lons[] = {
-     40.5,
-     47.6,
-     56.6,
-     43.6
-    };
+	News  news [NEWS_COUNT]; //—оздание данных стуркуры News
+
+     news[1].description = "Fire"; //название новости
+     news[2].description = "Flood";
+     news[3].description = "Asteroid";
+     news[4].description = "City Day";   
+  
+     news[1].lats = 45.5; //координаты 1
+     news[2].lats = 48.6;
+     news[3].lats = 58.6;
+     news[4].lats = 60.6;
+  
+     news[1].lons = 40.5; //координаты 2
+     news[2].lons = 47.6;
+     news[3].lons = 56.6;
+     news[4].lons = 43.6;
     
     std::cout << "News in your region:" << std::endl << std::endl;
     
