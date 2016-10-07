@@ -18,24 +18,25 @@ int main() {
     
 	News  news [NEWS_COUNT]; //Создание данных стуркуры News
 
-     news[1].description = "Fire"; //название новости
-     news[2].description = "Flood";
-     news[3].description = "Asteroid";
-     news[4].description = "City Day";   
+	news[1].description = "Fire"; //название новости
+	news[2].description = "Flood";
+	news[3].description = "Asteroid";
+	news[4].description = "City Day";   
   
-     news[1].lats = 45.5; //координаты 1
-     news[2].lats = 48.6;
-     news[3].lats = 58.6;
-     news[4].lats = 60.6;
+	news[1].lats = 45.5; //координаты 1
+	news[2].lats = 48.6;
+	news[3].lats = 58.6;
+	news[4].lats = 60.6;
   
-     news[1].lons = 40.5; //координаты 2
-     news[2].lons = 47.6;
-     news[3].lons = 56.6;
-     news[4].lons = 43.6;
+	news[1].lons = 40.5; //координаты 2
+	news[2].lons = 47.6;
+	news[3].lons = 56.6;
+	news[4].lons = 43.6;
+
+	float myLat, myLon, distance, tmp;
+	char* tmp2; 
     
     std::cout << "News in your region:" << std::endl << std::endl;
-    
-    float myLat, myLon;
     
     std::cout << "Enter your position" << std::endl;
     
@@ -43,13 +44,12 @@ int main() {
     
     bool hasNews = false;
     
-    for(int i = 0; i < NEWS_COUNT; ++i) {
-        double distance = std::sqrt(std::pow((myLat - lats[i]), 2) + std::pow((myLon - lons[i]), 2));   
-       
-        if(distance < RADIUS) {
-            std::cout << news[i] << std::endl;
-            hasNews = true;
-        }   
+	for(int i = 0; i < NEWS_COUNT; ++i) {
+	distance =std::sqrt(std::pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));  
+		if (distance < RADIUS) {
+			news[i].D = distance;
+			hasNews = true;
+		}
     }
     
     if (hasNews) {
