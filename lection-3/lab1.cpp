@@ -64,4 +64,18 @@ int main() {
               } 
          } 
 	} 
+
+	for(int i = 0; i < NEWS_COUNT; i++) { //вывод сортированных новостей и дистанции (нужные по условию задачи)
+			if (news[i].D>0) { 
+				std::cout <<news[i].description<<" - "<<news[i].D<<std::endl; 
+		    } 
+	} 
+
+
+	if (hasNews) { //вежливость
+        std::cout << "I hope, I helped you" << std::endl;
+    } else {
+        std::cout << "Sorry, there are no news (((" << std::endl;
+    }
+
 }
