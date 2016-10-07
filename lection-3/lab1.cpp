@@ -78,4 +78,5 @@ int main() {
         std::cout << "Sorry, there are no news (((" << std::endl;
     }
 
+	system("pause"); //задержка вывода на экране
 }
