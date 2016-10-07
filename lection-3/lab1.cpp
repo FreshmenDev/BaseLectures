@@ -3,8 +3,11 @@
 #include <cmath>
 
 int main() {
-    const int NEWS_COUNT = 4;
-    const double RADIUS = 10.0;
+	
+	setlocale(LC_ALL,"RUS"); //поддержка русского €зыка
+
+    const int NEWS_COUNT = 4; // кол-во новостей
+    const double RADIUS = 10.0; // объ€вленный радиус
     
 	struct News {  // ќбъ€вление структуры News
  		char* description; 
