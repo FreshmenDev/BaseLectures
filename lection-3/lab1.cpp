@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <iomanip> //модуль для округления
 
 int main() {
 	
@@ -67,7 +68,7 @@ int main() {
 
 	for(int i = 0; i < NEWS_COUNT; i++) { //вывод сортированных новостей и дистанции (нужные по условию задачи)
 			if (news[i].D>0) { 
-				std::cout <<news[i].description<<" - "<<news[i].D<<std::endl; 
+				std::cout << std::setprecision(2) <<news[i].description<<" - "<<news[i].D<<std::endl; //округление дистанции
 		    } 
 	} 
 
