@@ -33,28 +33,35 @@ int main() {
 	news[3].lons = 56.6;
 	news[4].lons = 43.6;
 
-	float myLat, myLon, distance, tmp;
-	char* tmp2; 
+	float myLat, myLon, distance, tmp; //коордната 1, координата 2, дистанция в формуле, промежуточная переменная для сортировки
+	char* tmp2; //промежуточная переменная для сортировки структуры
     
-    std::cout << "News in your region:" << std::endl << std::endl;
+    std::cout << "News in your region:" << std::endl << std::endl; 
     
     std::cout << "Enter your position" << std::endl;
     
-    std::cin >> myLat >> myLon;
+    std::cin >> myLat >> myLon; //ввод координат пользователя
     
     bool hasNews = false;
     
-	for(int i = 0; i < NEWS_COUNT; ++i) {
+	for(int i = 0; i < NEWS_COUNT; ++i) { //цикл для расчета дистанций
 	distance =std::sqrt(std::pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));  
-		if (distance < RADIUS) {
-			news[i].D = distance;
+		if (distance < RADIUS) { //поиск новостей, попадающих в радиус
+			news[i].D = distance; //дистанция - в массив для сортировки
 			hasNews = true;
 		}
     }
     
-    if (hasNews) {
-        std::cout << "I hope, I helped you" << std::endl;
-    } else {
-        std::cout << "Sorry, there are no news (((" << std::endl;
-    }
+	for(int i = 0; i < NEWS_COUNT- 1; i++) { //сортировка пузырька (повторение проходов по элементам сортируемого массива)           
+        for(int j = 0; j < NEWS_COUNT- i; j++) { //внутренний массив
+            if (news[j].D > news[j+1].D) { //перестановка новостей
+				tmp = news[j + 1].D;  
+				news[j + 1].D = news[j].D;
+				news[j].D = tmp; 
+				tmp2 = news[j + 1].description; //перестановка дистанции 
+				news[j + 1].description = news[j].description;
+				news[j].description = tmp2; 
+              } 
+         } 
+	} 
 }
