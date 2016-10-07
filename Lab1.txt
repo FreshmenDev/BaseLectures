@@ -1,84 +1,80 @@
 #include <iostream>
 #include <string>
-#include <cmath> 
-#include <iomanip> 
-#include <stdio.h> 
+#include <cmath>
+#include <stdlib.h>
 
 using namespace std;
-
-struct News
-{
-	char* nov;
-	double lats;
-	double lons;
-	double dis;
+float myLat, myLon;
+const int NEWS_COUNT = 4;
+const double RADIUS = 10.0;
+struct News {
+	char* view;
+	float lats;
+	float lons;
+	double distance;
 };
-int main()
-{
-	const int NEWS_COUNT = 4;
-	const double RADIUS = 10.0;
+int main() {
 
 	News news[NEWS_COUNT];
 
-	news[1].nov = "Fire";
-	news[2].nov = "Flood";
-	news[3].nov = "Asteroid";
-	news[4].nov = "City day";
+	news[0].view = "Fire";
+	news[0].lats = 45.5;
+	news[0].lons = 45.5;
 
-	news[1].lats = 45.5;
-	news[2].lats = 48.6;
-	news[3].lats = 58.6;
-	news[4].lats = 60.6;
+	news[1].view = "Flood";
+	news[1].lats = 48.6;
+	news[1].lons = 47.6;
 
-	news[1].lons = 40.5;
-	news[2].lons = 47.6;
-	news[3].lons = 56.6;
-	news[4].lons = 43.6;
+	news[2].view = "Asteroid";
+	news[2].lats = 58.6;
+	news[2].lons = 56.6;
 
+	news[3].view = "City Day";
+	news[3].lats = 60.6;
+	news[3].lons = 43.6;
 
-	cout << "News in your region:" << endl << endl;
+	cout << "News in your region:" << endl;
 
-	double myLat, myLon, q;
-	char* k;
-	int j;
+	float myLat, myLon;
 
 	cout << "Enter your position" << endl;
 
 	cin >> myLat >> myLon;
 
+	bool hasNews = false;
 
-	for (int i = 0; i < NEWS_COUNT; ++i)
-	{
-		double distance = sqrt(pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));
+	for (int i = 0; i < NEWS_COUNT; ++i) {
+		news[i].distance = sqrt(pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));
 
-		if (distance < RADIUS) {
-			news[i].dis = distance;
-		}
-		for (i = 0; i < NEWS_COUNT - 1; i++)
-		{
-			for (j = 0; j < NEWS_COUNT - i; j++)
-			{
-				if (news[j].dis > news[j + 1].dis)
-				{
-					k = news[j + 1].nov;
-					news[j + 1].nov = news[j].nov;
-					news[j].nov = k;
-
-					q = news[j + 1].dis;
-					news[j + 1].dis = news[j].dis;
-					news[j].dis = q;
-				}
-			}
-		}
-
-		for (i = 0; i < NEWS_COUNT; i++)
-		{
-			if (news[i].dis > 0) 
-			{
-				cout << news[i].nov <<  news[i].dis << '\n';
-			}
-
+		if (news[i].distance < RADIUS) {
+			hasNews = true;
 		}
 	}
+
+	for (int i = 1; i < NEWS_COUNT; ++i) {
+		News key = news[i];
+		int j = i - 1;
+
+		while (j > -1 && news[j].distance > key.distance) {
+			news[j + 1] = news[j];
+			--j;
+		}
+
+		news[j + 1] = key;
+	}
+
+	for (int k = 0; k < NEWS_COUNT; ++k) {
+		if (news[k].distance > RADIUS) break;
+		cout << news[k].view << '-' << news[k].distance << endl;
+	}
+
+	if (hasNews) {
+		cout << "I hope, I helped you" << endl;
+	}
+	else {
+		cout << "Sorry, there are no news (((" << endl;
+	}
+
+	system("pause");
 	return 0;
-}
+ }
