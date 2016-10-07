@@ -1,83 +1,83 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include <cmath>
-#include <iomanip> //модуль для округления
+#include <iomanip> //РјРѕРґСѓР»СЊ РґР»СЏ РѕРєСЂСѓРіР»РµРЅРёСЏ
 
 int main() {
 	
-	setlocale(LC_ALL,"RUS"); //поддержка русского языка
+	setlocale(LC_ALL,"RUS"); //РїРѕРґРґРµСЂР¶РєР° СЂСѓСЃСЃРєРѕРіРѕ СЏР·С‹РєР°
 
-    const int NEWS_COUNT = 4; // кол-во новостей
-    const double RADIUS = 10.0; // объявленный радиус
+    const int NEWS_COUNT = 4; // РєРѕР»-РІРѕ РЅРѕРІРѕСЃС‚РµР№
+    const double RADIUS = 10.0; // РѕР±СЉСЏРІР»РµРЅРЅС‹Р№ СЂР°РґРёСѓСЃ
     
-	struct News {  // Объявление структуры News
+	struct News {  // РћР±СЉСЏРІР»РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ News
  		char* description; 
  		double lats; 
  		double lons; 
  		float D; 
 	};  
     
-	News  news [NEWS_COUNT]; //Создание данных стуркуры News
+	News  news [NEWS_COUNT]; //РЎРѕР·РґР°РЅРёРµ РґР°РЅРЅС‹С… СЃС‚СѓСЂРєСѓСЂС‹ News
 
-	news[1].description = "Fire"; //название новости
+	news[1].description = "Fire"; //РЅР°Р·РІР°РЅРёРµ РЅРѕРІРѕСЃС‚Рё
 	news[2].description = "Flood";
 	news[3].description = "Asteroid";
 	news[4].description = "City Day";   
   
-	news[1].lats = 45.5; //координаты 1
+	news[1].lats = 45.5; //РєРѕРѕСЂРґРёРЅР°С‚С‹ 1
 	news[2].lats = 48.6;
 	news[3].lats = 58.6;
 	news[4].lats = 60.6;
   
-	news[1].lons = 40.5; //координаты 2
+	news[1].lons = 40.5; //РєРѕРѕСЂРґРёРЅР°С‚С‹ 2
 	news[2].lons = 47.6;
 	news[3].lons = 56.6;
 	news[4].lons = 43.6;
 
-	float myLat, myLon, distance, tmp; //коордната 1, координата 2, дистанция в формуле, промежуточная переменная для сортировки
-	char* tmp2; //промежуточная переменная для сортировки структуры
+	float myLat, myLon, distance, tmp; //РєРѕРѕСЂРґРЅР°С‚Р° 1, РєРѕРѕСЂРґРёРЅР°С‚Р° 2, РґРёСЃС‚Р°РЅС†РёСЏ РІ С„РѕСЂРјСѓР»Рµ, РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
+	char* tmp2; //РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё СЃС‚СЂСѓРєС‚СѓСЂС‹
     
     std::cout << "News in your region:" << std::endl << std::endl; 
     
     std::cout << "Enter your position" << std::endl;
     
-    std::cin >> myLat >> myLon; //ввод координат пользователя
+    std::cin >> myLat >> myLon; //РІРІРѕРґ РєРѕРѕСЂРґРёРЅР°С‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     
     bool hasNews = false;
     
-	for(int i = 0; i < NEWS_COUNT; ++i) { //цикл для расчета дистанций
+	for(int i = 0; i < NEWS_COUNT; ++i) { //С†РёРєР» РґР»СЏ СЂР°СЃС‡РµС‚Р° РґРёСЃС‚Р°РЅС†РёР№
 	distance =std::sqrt(std::pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));  
-		if (distance < RADIUS) { //поиск новостей, попадающих в радиус
-			news[i].D = distance; //дистанция - в массив для сортировки
+		if (distance < RADIUS) { //РїРѕРёСЃРє РЅРѕРІРѕСЃС‚РµР№, РїРѕРїР°РґР°СЋС‰РёС… РІ СЂР°РґРёСѓСЃ
+			news[i].D = distance; //РґРёСЃС‚Р°РЅС†РёСЏ - РІ РјР°СЃСЃРёРІ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
 			hasNews = true;
 		}
     }
     
-	for(int i = 0; i < NEWS_COUNT- 1; i++) { //сортировка пузырька (повторение проходов по элементам сортируемого массива)           
-        for(int j = 0; j < NEWS_COUNT- i; j++) { //внутренний массив
-            if (news[j].D > news[j+1].D) { //перестановка новостей
+	for(int i = 0; i < NEWS_COUNT- 1; i++) { //СЃРѕСЂС‚РёСЂРѕРІРєР° РїСѓР·С‹СЂСЊРєР° (РїРѕРІС‚РѕСЂРµРЅРёРµ РїСЂРѕС…РѕРґРѕРІ РїРѕ СЌР»РµРјРµРЅС‚Р°Рј СЃРѕСЂС‚РёСЂСѓРµРјРѕРіРѕ РјР°СЃСЃРёРІР°)           
+        for(int j = 0; j < NEWS_COUNT- i; j++) { //РІРЅСѓС‚СЂРµРЅРЅРёР№ РјР°СЃСЃРёРІ
+            if (news[j].D > news[j+1].D) { //РїРµСЂРµСЃС‚Р°РЅРѕРІРєР° РЅРѕРІРѕСЃС‚РµР№
 				tmp = news[j + 1].D;  
 				news[j + 1].D = news[j].D;
 				news[j].D = tmp; 
-				tmp2 = news[j + 1].description; //перестановка дистанции 
+				tmp2 = news[j + 1].description; //РїРµСЂРµСЃС‚Р°РЅРѕРІРєР° РґРёСЃС‚Р°РЅС†РёРё 
 				news[j + 1].description = news[j].description;
 				news[j].description = tmp2; 
               } 
          } 
 	} 
 
-	for(int i = 0; i < NEWS_COUNT; i++) { //вывод сортированных новостей и дистанции (нужные по условию задачи)
+	for(int i = 0; i < NEWS_COUNT; i++) { //РІС‹РІРѕРґ СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹С… РЅРѕРІРѕСЃС‚РµР№ Рё РґРёСЃС‚Р°РЅС†РёРё (РЅСѓР¶РЅС‹Рµ РїРѕ СѓСЃР»РѕРІРёСЋ Р·Р°РґР°С‡Рё)
 			if (news[i].D>0) { 
-				std::cout << std::setprecision(2) <<news[i].description<<" - "<<news[i].D<<std::endl; //округление дистанции
+				std::cout << std::setprecision(2) <<news[i].description<<" - "<<news[i].D<<std::endl; //РѕРєСЂСѓРіР»РµРЅРёРµ РґРёСЃС‚Р°РЅС†РёРё
 		    } 
 	} 
 
 
-	if (hasNews) { //вежливость
+	if (hasNews) { //РІРµР¶Р»РёРІРѕСЃС‚СЊ
         std::cout << "I hope, I helped you" << std::endl;
     } else {
         std::cout << "Sorry, there are no news (((" << std::endl;
     }
 
-	system("pause"); //задержка вывода на экране
+	system("pause"); //Р·Р°РґРµСЂР¶РєР° РІС‹РІРѕРґР° РЅР° СЌРєСЂР°РЅРµ
 }
