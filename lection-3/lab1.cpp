@@ -4,10 +4,12 @@
 
 using namespace std;
 
+const int NEWS_COUNT = 4;
+const double RADIUS = 10.0;
+
 int main() {
-    const int NEWS_COUNT = 4;
-    const double RADIUS = 10.0;
-    
+	setlocale(LC_ALL, "RUS"); //поддержка русского языка
+
     char* news[] = {
      "Fire",
      "Flood",
