@@ -8,7 +8,7 @@ const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
 int main() {
-	setlocale(LC_ALL, "RUS"); //поддержка русского языка
+	setlocale(LC_ALL, "RUS"); //????????? ???
 
     char* news[] = {
      "Fire",
@@ -55,4 +55,5 @@ int main() {
     } else {
         cout << "Sorry, there are no news (((" << endl;
     }
+    system("pause");
 }
