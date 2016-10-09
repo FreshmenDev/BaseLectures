@@ -73,7 +73,7 @@ int main() {
 	} 
 
 
-	if (hasNews) { //вежливость
+	if (hasNews) {
         std::cout << "I hope, I helped you" << std::endl;
     } else {
         std::cout << "Sorry, there are no news (((" << std::endl;
