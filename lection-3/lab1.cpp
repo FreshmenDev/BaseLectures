@@ -34,7 +34,7 @@ int main() {
 	news[2].lons = 56.6;
 	news[3].lons = 43.6;
 
-	float myLat, myLon, distance, tmp; //коордната 1, координата 2, дистанция в формуле, промежуточная переменная для сортировки
+	float myLat, myLon, distances, tmp; //коордната 1, координата 2, дистанция в формуле, промежуточная переменная для сортировки
 	char* tmp2; //промежуточная переменная для сортировки структуры
     
     std::cout << "News in your region:" << std::endl << std::endl; 
@@ -46,9 +46,9 @@ int main() {
     bool hasNews = false;
     
 	for(int i = 0; i < NEWS_COUNT; ++i) { //цикл для расчета дистанций
-	distance =std::sqrt(std::pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));  
-		if (distance < RADIUS) { //поиск новостей, попадающих в радиус
-			news[i].D = distance; //дистанция - в массив для сортировки
+	distances =std::sqrt(std::pow((myLat - news[i].lats), 2) + pow((myLon - news[i].lons), 2));  
+		if (distances < RADIUS) { //поиск новостей, попадающих в радиус
+			news[i].D = distances; //дистанция - в массив для сортировки
 			hasNews = true;
 		}
     }
