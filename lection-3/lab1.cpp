@@ -19,20 +19,20 @@ int main() {
     
 	News  news [NEWS_COUNT]; //Создание данных стуркуры News
 
-	news[1].description = "Fire"; //название новости
-	news[2].description = "Flood";
-	news[3].description = "Asteroid";
-	news[4].description = "City Day";   
+	news[0].description = "Fire"; //название новости
+	news[1].description = "Flood";
+	news[2].description = "Asteroid";
+	news[3].description = "City Day";   
   
-	news[1].lats = 45.5; //координаты 1
-	news[2].lats = 48.6;
-	news[3].lats = 58.6;
-	news[4].lats = 60.6;
+	news[0].lats = 45.5; //координаты 1
+	news[1].lats = 48.6;
+	news[2].lats = 58.6;
+	news[3].lats = 60.6;
   
-	news[1].lons = 40.5; //координаты 2
-	news[2].lons = 47.6;
-	news[3].lons = 56.6;
-	news[4].lons = 43.6;
+	news[0].lons = 40.5; //координаты 2
+	news[1].lons = 47.6;
+	news[2].lons = 56.6;
+	news[3].lons = 43.6;
 
 	float myLat, myLon, distance, tmp; //коордната 1, координата 2, дистанция в формуле, промежуточная переменная для сортировки
 	char* tmp2; //промежуточная переменная для сортировки структуры
