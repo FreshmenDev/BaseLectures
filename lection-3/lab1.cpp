@@ -53,14 +53,14 @@ int main() {
 		}
     }
     
-	for(int i = 0; i < NEWS_COUNT- 1; i++) { //сортировка пузырька (повторение проходов по элементам сортируемого массива)           
-        for(int j = 0; j < NEWS_COUNT- i; j++) { //внутренний массив
-            if (news[j].D > news[j+1].D) { //перестановка новостей
-				tmp = news[j + 1].D;  
-				news[j + 1].D = news[j].D;
+	for(int i = 0; i < NEWS_COUNT; i++) { //сортировка пузырька (повторение проходов по элементам сортируемого массива)           
+        for(int j = i+1; j < NEWS_COUNT; j++) { //внутренний массив
+            if (news[j].D > news[j].D) { //перестановка новостей
+				tmp = news[j].D;  
+				news[j].D = news[j].D;
 				news[j].D = tmp; 
-				tmp2 = news[j + 1].description; //перестановка дистанции 
-				news[j + 1].description = news[j].description;
+				tmp2 = news[j].description; //перестановка дистанции 
+				news[j].description = news[j].description;
 				news[j].description = tmp2; 
               } 
          } 
