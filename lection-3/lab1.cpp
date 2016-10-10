@@ -20,21 +20,10 @@ int main()
 
 	News allNews[NEWS_COUNT];	// создаю объект allNews[] типа News
 	
-	allNews[0].news = "Пожар";	// инициализирую начальные значения для всех
-	allNews[0].lats = 45.5;		// четырех элементов массива allNews
-	allNews[0].lons = 40.5;
-
-	allNews[1].news = "Наводнение";
-	allNews[1].lats = 48.6;
-	allNews[1].lons = 47.6;
-
-	allNews[2].news = "Метеорит";
-	allNews[2].lats = 58.6;
-	allNews[2].lons = 56.6;
-
-	allNews[3].news = "День города";
-	allNews[3].lats = 60.6;
-	allNews[3].lons = 43.6;
+	allNews[0] = { "Пожар", 45.5, 40.5 };		// инициализирую начальные значения для всех
+	allNews[1] = { "Наводнение", 48.6, 47.6 };	// четырех элементов массива allNews
+	allNews[2] = { "Метеорит", 58.6, 56.6 };
+	allNews[3] = { "День города", 60.6, 43.6 };
 
 	std::cout << "Новости в Вашем регионе:" << std::endl << std::endl;
 
