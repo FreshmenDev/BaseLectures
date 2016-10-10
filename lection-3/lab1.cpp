@@ -49,6 +49,10 @@ int main()
 			allNews[i].finalDistance = 0;	// если новости не в радиусе 10, то записать в i элемент массива число 0
 		}
 	}
+	
+	char* temporaryStr;	// промежуточная переменная для названий новостных событий
+	double temporaryValue;	// промежуточная переменная для запоминания расстояний
+	double temporaryLats, temporaryLons;	// переменные для хранения координат
 
 	for (int i = 0; i < NEWS_COUNT; ++i)	// сортировка расстояний по возрастанию
 	{
@@ -56,16 +60,21 @@ int main()
 		{
 			if (allNews[j].finalDistance < allNews[j - 1].finalDistance)
 			{
-				double temporaryInt;	// промежуточная переменная для запоминания расстояний
-				char* temporaryStr;		// ==//== для названий новостных событий
-
-				temporaryInt = allNews[j - 1].finalDistance;	// замена расстояний местами, если выполняется условие 
+				temporaryValue = allNews[j - 1].finalDistance;	// замена расстояний местами, если выполняется условие 
 				allNews[j - 1].finalDistance = allNews[j].finalDistance;
-				allNews[j].finalDistance = temporaryInt;
+				allNews[j].finalDistance = temporaryValue;
 
-				temporaryStr = allNews[j - 1].news;		// замена новостных событий согласно их расстояниям
+				temporaryStr = allNews[j - 1].news;	// замена новостных событий согласно их расстояниям
 				allNews[j - 1].news = allNews[j].news;
 				allNews[j].news = temporaryStr;
+				
+				temporaryLats = allNews[j - 1].lats;	// замена координат lats местами
+				allNews[j - 1].lats = allNews[j].lats;
+				allNews[j].lats = temporaryLats;
+
+				temporaryLons = allNews[j - 1].lons;	// замена координат lons
+				allNews[j - 1].lons = allNews[j].lons;
+				allNews[j].lons = temporaryLons;
 			}
 		}
 	}
