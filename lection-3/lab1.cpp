@@ -11,8 +11,8 @@ using std::cin; //которые нам нужны (избежение конф�
 const int NEWS_COUNT = 4;
 const double RADIUS = 10.0;
 
- struct Help // определяем структуру данных
-    {
+ struct News // определяем структуру данных
+    {   					                        // optimised for better memory use.
         float lon;
         float lat;
         char* description;
@@ -24,7 +24,7 @@ const double RADIUS = 10.0;
 int main()
 {
 	// определяем массив news структуры Help
-	Help news[NEWS_COUNT] = {
+	News news[NEWS_COUNT] = {
 	    {45.5, 40.5, "Fire"},
 	    {48.6, 47.6, "Flood"},
         {58.6, 56.6, "Asteroid"},
@@ -40,7 +40,7 @@ int main()
     cin >> myLat >> myLon;
     
     bool hasNews = false;
-    float dist[NEWS_COUNT];
+    double dist[NEWS_COUNT];
 
     for (int i = 0; i < NEWS_COUNT; ++i) 	
     {
@@ -57,7 +57,7 @@ int main()
     }
 	
 	// определение времменых переменых для использования в сортировки
-    float tempNum;
+    double tempNum;
     char* tempStr;
 
     for (int i = 0; i < NEWS_COUNT; ++i)  // сортировка (по порядку возрастания)
