@@ -49,7 +49,7 @@ int main()
 	for (int i = 0; i < NEWS_COUNT; ++i)
 	{
 		double distance = std::sqrt(std::pow((myLat - allNews[i].lats), 2) + std::pow((myLon - allNews[i].lons), 2));
-										// расчитываем расстояние от пользователя до места событий для каждой новости
+						// расчитываем расстояние от пользователя до места событий для каждой новости
 		if (distance < RADIUS) 
 		{
 			allNews[i].finalDistance = distance;
@@ -83,7 +83,7 @@ int main()
 
 	for (int i = 0; i < NEWS_COUNT; ++i)
 	{
-		if (allNews[i].finalDistance != 0)												// вывод результатов на экран
+		if (allNews[i].finalDistance != 0)						// вывод результатов на экран
 			std::cout << allNews[i].news << " - " << std::setprecision(2) << allNews[i].finalDistance << std::endl;
 	}
 	if (hasNews) {
